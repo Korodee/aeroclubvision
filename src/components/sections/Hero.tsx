@@ -62,7 +62,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={300}>
-            <div className="flex flex-wrap gap-x-10 gap-y-2 border-t border-cream-10 pt-6">
+            <div className="flex flex-wrap gap-x-10 gap-y-2 pt-2">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>
                   <div className="font-display text-[32px] font-light leading-none tracking-[-0.035em] text-cream md:text-[36px]">
