@@ -61,7 +61,7 @@ export const PREREQUISITES: Prerequisite[] = [
   },
 ];
 
-export const MEMBER_APP_URL = "https://app.aeroclubduquebec.com";
+export const MEMBER_APP_URL = "https://aeroclubvision.flychronos.com/";
 export const CONTACT_EMAIL = "mathieu@aeroclubduquebec.com";
 export const CONTACT_PHONE = "4383427706";
 export const CONTACT_PHONE_DISPLAY = "438-342-7706";
