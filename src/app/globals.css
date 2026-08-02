@@ -1,36 +1,173 @@
 @import "tailwindcss";
 
+/* Semantic tokens — flipped by data-theme. Default: dark navy. */
+:root,
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #071428;
+  --ink-elevated: #0a1830;
+  --ink-panel: #0c1c36;
+  --ink-card: #0c1c36;
+  --cream: #f2f5fa;
+  --cream-r: 242;
+  --cream-g: 245;
+  --cream-b: 250;
+  --accent: #4d84f7;
+  --accent-r: 77;
+  --accent-g: 132;
+  --accent-b: 247;
+  --photo-scrim: 7 20 40;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --ink: #f5f6f8;
+  --ink-elevated: #f5f6f8;
+  --ink-panel: #ffffff;
+  --ink-card: #ffffff;
+  --cream: #14161c;
+  --cream-r: 20;
+  --cream-g: 22;
+  --cream-b: 28;
+  --accent: #2f62e0;
+  --accent-r: 47;
+  --accent-g: 98;
+  --accent-b: 224;
+  --photo-scrim: 12 14 18;
+}
+
+/* Photo sections keep light type on darkened imagery in both themes */
+.theme-media {
+  --cream: #f2f5fa;
+  --cream-r: 242;
+  --cream-g: 245;
+  --cream-b: 250;
+  --media-accent: #9ec5ff;
+  color: var(--cream);
+}
+
+.text-media-accent {
+  color: var(--media-accent, var(--accent));
+}
+
+/* Hero photo treatment by theme */
+.hero-photo {
+  filter: brightness(0.72);
+  transition: filter 0.35s ease;
+}
+
+.hero-scrim-side,
+.hero-scrim-bottom {
+  transition: opacity 0.35s ease, background 0.35s ease;
+}
+
+.hero-scrim-side {
+  background: linear-gradient(
+    105deg,
+    rgba(12, 14, 18, 0.78) 0%,
+    rgba(12, 14, 18, 0.52) 38%,
+    rgba(12, 14, 18, 0.18) 68%,
+    transparent 100%
+  );
+}
+
+.hero-scrim-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(12, 14, 18, 0.55) 0%,
+    transparent 48%
+  );
+}
+
+html[data-theme="dark"] .hero-photo {
+  filter: brightness(0.52);
+}
+
+html[data-theme="dark"] .hero-scrim-side {
+  background: linear-gradient(
+    105deg,
+    rgba(7, 20, 40, 0.94) 0%,
+    rgba(7, 20, 40, 0.72) 40%,
+    rgba(7, 20, 40, 0.22) 75%,
+    transparent 100%
+  );
+}
+
+html[data-theme="dark"] .hero-scrim-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(7, 20, 40, 0.8) 0%,
+    transparent 45%
+  );
+}
+
+/* CTA / cinematic photo overlays — always readable */
+.cta-photo {
+  filter: brightness(0.55);
+}
+
+.cta-scrim {
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 20, 40, 0.78) 0%,
+      rgba(7, 20, 40, 0.48) 45%,
+      rgba(7, 20, 40, 0.62) 100%
+    ),
+    rgba(7, 20, 40, 0.38);
+}
+
+.cinematic-scrim {
+  background: rgba(7, 20, 40, 0.5);
+}
+
+.fleet-photo-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(7, 20, 40, 0.72) 0%,
+    transparent 55%
+  );
+}
+
+.fleet-photo-scrim-strong {
+  background: linear-gradient(
+    to top,
+    rgba(7, 20, 40, 0.8) 0%,
+    transparent 50%
+  );
+}
+
 @theme inline {
-  --color-ink: #0a0a0b;
-  --color-ink-elevated: #0a0a0b;
-  --color-ink-panel: #0a0a0b;
-  --color-ink-card: #0a0a0b;
-  --color-cream: #f0ede8;
-  --color-accent: #4875f0;
+  --color-ink: var(--ink);
+  --color-ink-elevated: var(--ink-elevated);
+  --color-ink-panel: var(--ink-panel);
+  --color-ink-card: var(--ink-card);
+  --color-cream: var(--cream);
+  --color-accent: var(--accent);
 
-  --color-cream-55: rgba(240, 237, 232, 0.78);
-  --color-cream-52: rgba(240, 237, 232, 0.74);
-  --color-cream-45: rgba(240, 237, 232, 0.68);
-  --color-cream-42: rgba(240, 237, 232, 0.64);
-  --color-cream-40: rgba(240, 237, 232, 0.62);
-  --color-cream-35: rgba(240, 237, 232, 0.58);
-  --color-cream-30: rgba(240, 237, 232, 0.52);
-  --color-cream-28: rgba(240, 237, 232, 0.5);
-  --color-cream-25: rgba(240, 237, 232, 0.48);
-  --color-cream-22: rgba(240, 237, 232, 0.46);
-  --color-cream-20: rgba(240, 237, 232, 0.44);
-  --color-cream-12: rgba(240, 237, 232, 0.12);
-  --color-cream-10: rgba(240, 237, 232, 0.1);
-  --color-cream-09: rgba(240, 237, 232, 0.09);
-  --color-cream-08: rgba(240, 237, 232, 0.08);
-  --color-cream-07: rgba(240, 237, 232, 0.07);
-  --color-cream-04: rgba(240, 237, 232, 0.04);
-  --color-cream-60: rgba(240, 237, 232, 0.82);
-  --color-cream-50: rgba(240, 237, 232, 0.7);
-  --color-cream-75: rgba(240, 237, 232, 0.88);
+  --color-cream-55: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.78);
+  --color-cream-52: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.74);
+  --color-cream-45: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.68);
+  --color-cream-42: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.64);
+  --color-cream-40: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.62);
+  --color-cream-35: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.58);
+  --color-cream-30: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.52);
+  --color-cream-28: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.5);
+  --color-cream-25: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.48);
+  --color-cream-22: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.46);
+  --color-cream-20: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.44);
+  --color-cream-12: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.12);
+  --color-cream-10: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.1);
+  --color-cream-09: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.09);
+  --color-cream-08: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.08);
+  --color-cream-07: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.07);
+  --color-cream-04: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.04);
+  --color-cream-60: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.82);
+  --color-cream-50: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.7);
+  --color-cream-75: rgb(var(--cream-r) var(--cream-g) var(--cream-b) / 0.88);
 
-  --color-accent-07: rgba(72, 117, 240, 0.07);
-  --color-accent-25: rgba(72, 117, 240, 0.25);
+  --color-accent-07: rgb(var(--accent-r) var(--accent-g) var(--accent-b) / 0.07);
+  --color-accent-25: rgb(var(--accent-r) var(--accent-g) var(--accent-b) / 0.25);
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-fraunces);
@@ -53,10 +190,13 @@ html {
 }
 
 body {
-  background-color: var(--color-ink);
-  color: var(--color-cream);
+  background-color: var(--ink);
+  color: var(--cream);
   font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
 ::-webkit-scrollbar {
@@ -67,6 +207,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
   }
 
   .ticker-track {

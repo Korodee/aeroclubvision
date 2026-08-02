@@ -143,7 +143,7 @@ export function Fleet() {
                   </motion.div>
                 ))}
 
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,10,11,0.55)_0%,transparent_55%)]" />
+                <div className="fleet-photo-scrim pointer-events-none absolute inset-0" />
                 <LightboxTriggerHint />
               </button>
 
@@ -219,7 +219,7 @@ function MobilePlaneCard({
               />
             </div>
           ))}
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,10,11,0.75)_0%,transparent_50%)]" />
+          <div className="fleet-photo-scrim-strong pointer-events-none absolute inset-0" />
           <LightboxTriggerHint />
         </button>
 

@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { MEMBER_APP_URL, NAV_LINKS } from "@/data/content";
 import { cn } from "@/lib/cn";
 
@@ -38,10 +39,10 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-100 flex h-18 items-center transition-[background,border-color,backdrop-filter] duration-300",
+        "fixed inset-x-0 top-0 z-100 flex h-18 items-center transition-[background,border-color,backdrop-filter,color] duration-300",
         scrolled
-          ? "border-b border-cream-08 bg-ink/94 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
+          ? "border-b border-cream-08 bg-ink/94 text-cream backdrop-blur-md"
+          : "theme-media border-b border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-12 lg:px-20">
@@ -55,7 +56,7 @@ export function Navbar() {
           </span>
         </a>
 
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-5 md:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -65,6 +66,7 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <ThemeToggle />
           <Button
             href={MEMBER_APP_URL}
             variant="primary"
@@ -74,19 +76,22 @@ export function Navbar() {
           </Button>
         </div>
 
-        <button
-          type="button"
-          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-          className="flex items-center justify-center p-1 text-cream md:hidden"
-        >
-          {menuOpen ? (
-            <X size={24} strokeWidth={1.5} />
-          ) : (
-            <Menu size={24} strokeWidth={1.5} />
-          )}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex items-center justify-center p-1 text-cream"
+          >
+            {menuOpen ? (
+              <X size={24} strokeWidth={1.5} />
+            ) : (
+              <Menu size={24} strokeWidth={1.5} />
+            )}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

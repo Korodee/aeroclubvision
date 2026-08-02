@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-dvh flex-col md:h-dvh md:overflow-hidden"
+      className="theme-media relative flex min-h-dvh flex-col md:h-dvh md:overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden">
         <Image
@@ -19,16 +19,16 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="h-full w-full object-cover object-center brightness-50"
+          className="hero-photo h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(10,10,11,0.92)_0%,rgba(10,10,11,0.68)_40%,rgba(10,10,11,0.2)_75%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(10,10,11,0.75)_0%,transparent_45%)]" />
+        <div className="hero-scrim-side absolute inset-0" />
+        <div className="hero-scrim-bottom absolute inset-0" />
       </div>
 
       <div className="relative flex flex-1 items-center px-6 pt-24 pb-8 md:min-h-0 md:px-12 md:pt-30 md:pb-10 lg:px-20">
         <div className="max-w-150">
           <Reveal delay={0}>
-            <span className="mb-5 block font-mono text-[10px] tracking-[0.14em] text-accent uppercase md:mb-8">
+            <span className="text-media-accent mb-5 block font-mono text-[10px] tracking-[0.14em] uppercase drop-shadow-sm md:mb-8">
               CYJN · CYRQ · CSE4 · CSC3
             </span>
           </Reveal>

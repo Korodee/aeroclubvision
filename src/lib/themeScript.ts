@@ -1,0 +1,1 @@
+export const themeInitScript = `(function(){try{var k='aeroclub-theme';var t=localStorage.getItem(k);if(t!=='light'&&t!=='dark'){t='dark'}document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();`;

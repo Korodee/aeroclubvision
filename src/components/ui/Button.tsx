@@ -24,7 +24,7 @@ const variants: Record<ButtonVariant, string> = {
   ctaWhite:
     "inline-flex items-center justify-center rounded-[7px] bg-white px-7 py-3.5 text-sm font-medium tracking-[0.01em] text-accent transition-opacity hover:opacity-90",
   ctaOutline:
-    "inline-flex items-center justify-center rounded-[7px] border border-white/30 bg-transparent px-7 py-3.5 text-sm font-normal tracking-[0.01em] text-white/75 transition-colors hover:border-white/60 hover:text-white",
+    "inline-flex items-center justify-center rounded-[7px] border border-cream-30 bg-transparent px-7 py-3.5 text-sm font-normal tracking-[0.01em] text-cream-75 transition-colors hover:border-cream-60 hover:text-cream",
 };
 
 export function Button({
