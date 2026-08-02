@@ -25,6 +25,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://aeroclubvision.vercel.app",
+  ),
   title: "Aéro-club du Québec — L'aviation générale, enfin accessible",
   description:
     "Des avions entretenus commercialement, à une fraction du prix du marché. 11 appareils sur 4 bases au Québec. 100% non lucratif.",
@@ -34,6 +37,21 @@ export const metadata: Metadata = {
       "L'aviation générale, enfin accessible. Dès 100 $/h dry, sans frais cachés.",
     locale: "fr_CA",
     type: "website",
+    images: [
+      {
+        url: "/thumbnail.png",
+        width: 2880,
+        height: 1616,
+        alt: "Aéro-club du Québec — L'aviation générale, enfin accessible",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aéro-club du Québec",
+    description:
+      "L'aviation générale, enfin accessible. Dès 100 $/h dry, sans frais cachés.",
+    images: ["/thumbnail.png"],
   },
 };
 
