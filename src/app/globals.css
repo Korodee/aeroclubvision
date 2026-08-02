@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #0a0a0b;
+  --color-ink-elevated: #0a0a0b;
+  --color-ink-panel: #0a0a0b;
+  --color-ink-card: #0a0a0b;
+  --color-cream: #f0ede8;
+  --color-accent: #4875f0;
+
+  --color-cream-55: rgba(240, 237, 232, 0.78);
+  --color-cream-52: rgba(240, 237, 232, 0.74);
+  --color-cream-45: rgba(240, 237, 232, 0.68);
+  --color-cream-42: rgba(240, 237, 232, 0.64);
+  --color-cream-40: rgba(240, 237, 232, 0.62);
+  --color-cream-35: rgba(240, 237, 232, 0.58);
+  --color-cream-30: rgba(240, 237, 232, 0.52);
+  --color-cream-28: rgba(240, 237, 232, 0.5);
+  --color-cream-25: rgba(240, 237, 232, 0.48);
+  --color-cream-22: rgba(240, 237, 232, 0.46);
+  --color-cream-20: rgba(240, 237, 232, 0.44);
+  --color-cream-12: rgba(240, 237, 232, 0.12);
+  --color-cream-10: rgba(240, 237, 232, 0.1);
+  --color-cream-09: rgba(240, 237, 232, 0.09);
+  --color-cream-08: rgba(240, 237, 232, 0.08);
+  --color-cream-07: rgba(240, 237, 232, 0.07);
+  --color-cream-04: rgba(240, 237, 232, 0.04);
+  --color-cream-60: rgba(240, 237, 232, 0.82);
+  --color-cream-50: rgba(240, 237, 232, 0.7);
+  --color-cream-75: rgba(240, 237, 232, 0.88);
+
+  --color-accent-07: rgba(72, 117, 240, 0.07);
+  --color-accent-25: rgba(72, 117, 240, 0.25);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains);
+
+  --animate-ticker: ticker 32s linear infinite;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ticker-track {
+    animation: none !important;
+  }
+}

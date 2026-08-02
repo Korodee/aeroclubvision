@@ -1,0 +1,32 @@
+import Image from "next/image";
+import { Reveal } from "@/components/ui/Reveal";
+import { CINEMATIC_IMAGE } from "@/data/content";
+
+export function CinematicBreak() {
+  return (
+    <div className="relative h-[55vh] overflow-hidden">
+      <Image
+        src={CINEMATIC_IMAGE}
+        alt="Petit avion sur piste"
+        fill
+        sizes="100vw"
+        className="object-cover object-[center_40%] brightness-[0.3]"
+      />
+      <div className="absolute inset-0 bg-ink/30" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+        <Reveal>
+          <p className="text-center font-display text-[clamp(30px,4.5vw,60px)] font-light leading-tight tracking-tight text-cream italic">
+            Volez. Partagez.
+            <br />
+            Avancez.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <p className="text-center font-mono text-[10px] tracking-[0.12em] text-cream-35 uppercase">
+            Le plus grand aéroclub du Québec
+          </p>
+        </Reveal>
+      </div>
+    </div>
+  );
+}
