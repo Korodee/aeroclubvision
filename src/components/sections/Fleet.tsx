@@ -87,7 +87,6 @@ export function Fleet() {
               onOpenLightbox={(imgIndex) => openLightbox(plane.reg, imgIndex)}
             />
           ))}
-          <FleetFootnote />
         </div>
 
         {/* Desktop: list + sticky detail */}
@@ -160,8 +159,6 @@ export function Fleet() {
                 </motion.button>
               );
             })}
-
-            <FleetFootnote />
           </div>
 
           <div className="sticky top-24 overflow-hidden rounded-xl border border-cream-08 bg-ink">
@@ -432,39 +429,6 @@ function PlaneDetails({ aircraft }: { aircraft: Aircraft }) {
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-function FleetFootnote() {
-  const notes = [
-    {
-      label: "Monomoteurs",
-      detail: "Bloc min. 20 h · 50 h d'expérience totale",
-    },
-    {
-      label: "C-FVBQ",
-      detail: "Bloc 10 h · 20 h sur type · 100 h total",
-    },
-    {
-      label: "C-FTNF",
-      detail: "Bloc 10 h · qualification multi + checkout",
-    },
-  ] as const;
-
-  return (
-    <div className="mt-6 space-y-2 lg:px-3.5">
-      {notes.map((note) => (
-        <div
-          key={note.label}
-          className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
-        >
-          <div className="shrink-0 font-mono text-[10px] tracking-[0.08em] text-accent uppercase sm:w-28">
-            {note.label}
-          </div>
-          <div className="text-[12px] font-light text-cream-55">{note.detail}</div>
-        </div>
-      ))}
     </div>
   );
 }
