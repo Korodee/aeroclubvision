@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   ImageLightbox,
@@ -12,19 +13,53 @@ import { FLEET } from "@/data/fleet";
 import type { Aircraft } from "@/types";
 import { cn } from "@/lib/cn";
 
+type SortKey = "base" | "price";
+type SortDir = "asc" | "desc";
+
+const LIST_COLS = "grid-cols-[6.75rem_minmax(0,1fr)_10.5rem_6.75rem]";
+const LIST_GAP = "gap-x-5";
+
 export function Fleet() {
-  const [selected, setSelected] = useState(0);
+  const [selectedReg, setSelectedReg] = useState(FLEET[0]?.reg ?? "");
   const [selectedImg, setSelectedImg] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const aircraft = FLEET[selected];
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
 
-  const selectAircraft = (index: number) => {
-    setSelected(index);
+  const sortedFleet = useMemo(() => {
+    if (!sortKey) return FLEET;
+
+    return [...FLEET].sort((a, b) => {
+      const cmp =
+        sortKey === "base"
+          ? a.base.localeCompare(b.base, "fr")
+          : a.price - b.price;
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+  }, [sortKey, sortDir]);
+
+  const selectedIndex = Math.max(
+    0,
+    sortedFleet.findIndex((plane) => plane.reg === selectedReg),
+  );
+  const aircraft = sortedFleet[selectedIndex] ?? FLEET[0];
+
+  const selectAircraft = (reg: string) => {
+    setSelectedReg(reg);
     setSelectedImg(0);
   };
 
-  const openLightbox = (index: number, imgIndex = 0) => {
-    setSelected(index);
+  const toggleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((dir) => (dir === "asc" ? "desc" : "asc"));
+      return;
+    }
+    setSortKey(key);
+    setSortDir("asc");
+  };
+
+  const openLightbox = (reg: string, imgIndex = 0) => {
+    setSelectedReg(reg);
     setSelectedImg(imgIndex);
     setLightboxOpen(true);
   };
@@ -45,11 +80,11 @@ export function Fleet() {
 
         {/* Mobile: scrollable plane cards with image previews */}
         <div className="flex flex-col gap-5 lg:hidden">
-          {FLEET.map((plane, index) => (
+          {FLEET.map((plane) => (
             <MobilePlaneCard
               key={plane.reg}
               plane={plane}
-              onOpenLightbox={(imgIndex) => openLightbox(index, imgIndex)}
+              onOpenLightbox={(imgIndex) => openLightbox(plane.reg, imgIndex)}
             />
           ))}
           <FleetFootnote />
@@ -58,24 +93,35 @@ export function Fleet() {
         {/* Desktop: list + sticky detail */}
         <div className="hidden items-start gap-12 lg:grid lg:grid-cols-[1fr_380px]">
           <div>
-            <div className="mb-1 grid grid-cols-[112px_1fr_auto] gap-4 px-3.5 py-2.5">
-              {["Immatriculation", "Appareil", "Tarif dry"].map((heading) => (
-                <span
-                  key={heading}
-                  className="font-mono text-[9px] tracking-widest text-cream-45 uppercase"
-                >
-                  {heading}
-                </span>
-              ))}
+            <div className={cn("mb-1 grid items-end px-3.5 py-2.5", LIST_COLS, LIST_GAP)}>
+              <span className="font-mono text-[9px] tracking-widest text-cream-45 uppercase">
+                Immatriculation
+              </span>
+              <span className="font-mono text-[9px] tracking-widest text-cream-45 uppercase">
+                Appareil
+              </span>
+              <SortHeader
+                label="Base"
+                active={sortKey === "base"}
+                direction={sortDir}
+                onClick={() => toggleSort("base")}
+              />
+              <SortHeader
+                label="Tarif dry"
+                active={sortKey === "price"}
+                direction={sortDir}
+                align="right"
+                onClick={() => toggleSort("price")}
+              />
             </div>
 
-            {FLEET.map((plane, index) => {
-              const isActive = selected === index;
+            {sortedFleet.map((plane) => {
+              const isActive = selectedReg === plane.reg;
               return (
                 <motion.button
                   key={plane.reg}
                   type="button"
-                  onClick={() => selectAircraft(index)}
+                  onClick={() => selectAircraft(plane.reg)}
                   className={cn(
                     "w-full cursor-pointer border-b border-cream-07 px-3.5 py-4.5 text-left transition-colors duration-180",
                     isActive
@@ -84,7 +130,7 @@ export function Fleet() {
                   )}
                   whileTap={{ scale: 0.997 }}
                 >
-                  <div className="grid grid-cols-[112px_1fr_auto] items-center gap-4">
+                  <div className={cn("grid items-center", LIST_COLS, LIST_GAP)}>
                     <span
                       className={cn(
                         "font-mono text-[10px] tracking-[0.08em] transition-colors duration-200",
@@ -93,19 +139,21 @@ export function Fleet() {
                     >
                       {plane.reg}
                     </span>
-                    <div>
+                    <div className="min-w-0">
                       <div className="mb-0.5 text-sm font-normal text-cream">
                         {plane.name}
                       </div>
                       <div className="text-[11px] text-cream-50">
-                        {plane.category} · {plane.base}
+                        {plane.category}
                       </div>
                     </div>
-                    <div className="whitespace-nowrap font-display text-lg font-light tracking-[-0.01em] text-cream">
-                      {plane.price} $
+                    <div className="truncate text-[12px] font-light text-cream-55">
+                      {plane.base}
+                    </div>
+                    <div className="whitespace-nowrap text-right font-display text-lg font-light tracking-[-0.01em] tabular-nums text-cream">
+                      {plane.price}&nbsp;$
                       <span className="font-sans text-[11px] font-light text-cream-45">
-                        {" "}
-                        /h
+                        &nbsp;/h
                       </span>
                     </div>
                   </div>
@@ -138,7 +186,7 @@ export function Fleet() {
                       fill
                       sizes="420px"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      priority={idx === 0 && selected === 0}
+                      priority={idx === 0 && selectedIndex === 0}
                     />
                   </motion.div>
                 ))}
@@ -181,6 +229,51 @@ export function Fleet() {
         onIndexChange={setSelectedImg}
       />
     </section>
+  );
+}
+
+function SortHeader({
+  label,
+  active,
+  direction,
+  align = "left",
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  direction: SortDir;
+  align?: "left" | "right";
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`Trier par ${label}${active ? `, ${direction === "asc" ? "croissant" : "décroissant"}` : ""}`}
+      className={cn(
+        "inline-flex w-full items-center gap-1 font-mono text-[9px] tracking-widest text-cream-45 uppercase transition-colors hover:text-cream-60",
+        align === "right" ? "justify-end" : "justify-start",
+        active && "text-cream-60",
+      )}
+    >
+      {label}
+      <span className="inline-flex flex-col -space-y-1" aria-hidden>
+        <ChevronUp
+          className={cn(
+            "size-2.5 transition-colors",
+            active && direction === "asc" ? "text-accent" : "text-cream-30",
+          )}
+          strokeWidth={2.5}
+        />
+        <ChevronDown
+          className={cn(
+            "size-2.5 transition-colors",
+            active && direction === "desc" ? "text-accent" : "text-cream-30",
+          )}
+          strokeWidth={2.5}
+        />
+      </span>
+    </button>
   );
 }
 
