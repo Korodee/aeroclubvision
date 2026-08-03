@@ -462,7 +462,7 @@ function FleetFootnote() {
           <div className="shrink-0 font-mono text-[10px] tracking-[0.08em] text-accent uppercase sm:w-28">
             {note.label}
           </div>
-          <div className="text-[13px] font-light text-cream-55">{note.detail}</div>
+          <div className="text-[12px] font-light text-cream-55">{note.detail}</div>
         </div>
       ))}
     </div>
