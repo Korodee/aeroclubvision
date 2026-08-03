@@ -344,13 +344,35 @@ function PlaneDetails({ aircraft }: { aircraft: Aircraft }) {
 }
 
 function FleetFootnote() {
+  const notes = [
+    {
+      label: "Monomoteurs",
+      detail: "Bloc min. 20 h · 50 h d'expérience totale",
+    },
+    {
+      label: "C-FVBQ",
+      detail: "Bloc 10 h · 20 h sur type · 100 h total",
+    },
+    {
+      label: "C-FTNF",
+      detail: "Bloc 10 h · qualification multi + checkout",
+    },
+  ] as const;
+
   return (
-    <p className="mt-5 px-1 font-mono text-[10px] leading-[1.8] tracking-[0.03em] text-cream-45 lg:px-3.5">
-      * Monomoteurs : bloc min. 20 h · 50 h d&apos;expérience totale requises.
-      <br />
-      C-FVBQ : bloc 10 h · 20 h sur type · 100 h total.
-      <br />
-      C-FTNF : bloc 10 h · qualification multi + checkout.
-    </p>
+    <div className="mt-6 space-y-2 lg:px-3.5">
+      {notes.map((note) => (
+        <div
+          key={note.label}
+          className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
+        >
+          <div className="shrink-0 font-mono text-[10px] tracking-[0.08em] text-accent uppercase sm:w-28">
+            {note.label}
+          </div>
+          <div className="text-[13px] font-light text-cream-55">{note.detail}</div>
+        </div>
+      ))}
+    </div>
   );
 }
+

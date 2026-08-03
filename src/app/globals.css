@@ -52,7 +52,7 @@ html[data-theme="light"] {
 
 /* Hero photo treatment by theme */
 .hero-photo {
-  filter: brightness(0.72);
+  filter: brightness(0.62);
   transition: filter 0.35s ease;
 }
 
@@ -64,9 +64,9 @@ html[data-theme="light"] {
 .hero-scrim-side {
   background: linear-gradient(
     105deg,
-    rgba(12, 14, 18, 0.78) 0%,
-    rgba(12, 14, 18, 0.52) 38%,
-    rgba(12, 14, 18, 0.18) 68%,
+    rgba(12, 14, 18, 0.88) 0%,
+    rgba(12, 14, 18, 0.62) 38%,
+    rgba(12, 14, 18, 0.28) 68%,
     transparent 100%
   );
 }
@@ -74,7 +74,7 @@ html[data-theme="light"] {
 .hero-scrim-bottom {
   background: linear-gradient(
     to top,
-    rgba(12, 14, 18, 0.55) 0%,
+    rgba(12, 14, 18, 0.65) 0%,
     transparent 48%
   );
 }

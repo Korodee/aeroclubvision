@@ -28,7 +28,7 @@ export function Hero() {
       <div className="relative flex flex-1 items-center px-6 pt-24 pb-8 md:min-h-0 md:px-12 md:pt-30 md:pb-10 lg:px-20">
         <div className="max-w-150">
           <Reveal delay={0}>
-            <span className="text-media-accent mb-5 block font-mono text-[10px] tracking-[0.14em] uppercase drop-shadow-sm md:mb-8">
+            <span className="mb-5 block font-mono text-[11px] font-semibold tracking-[0.14em] text-[#3d7eff] uppercase drop-shadow-sm md:mb-8">
               CYJN · CYRQ · CSE4 · CSC3
             </span>
           </Reveal>
