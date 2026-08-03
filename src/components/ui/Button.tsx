@@ -22,7 +22,7 @@ const variants: Record<ButtonVariant, string> = {
   ghost:
     "inline-flex items-center justify-center rounded-[7px] border border-cream-20 bg-transparent px-5.5 py-2.75 text-[13px] font-normal tracking-[0.01em] text-cream-60 transition-colors hover:border-cream-45 hover:text-cream",
   ctaWhite:
-    "inline-flex items-center justify-center rounded-[7px] bg-white px-7 py-3.5 text-sm font-medium tracking-[0.01em] text-accent transition-opacity hover:opacity-90",
+    "inline-flex items-center justify-center rounded-[7px] bg-white px-7 py-3.5 text-sm font-medium tracking-[0.01em] text-[#1c45c4] transition-opacity hover:opacity-90",
   ctaOutline:
     "inline-flex items-center justify-center rounded-[7px] border border-cream-30 bg-transparent px-7 py-3.5 text-sm font-normal tracking-[0.01em] text-cream-75 transition-colors hover:border-cream-60 hover:text-cream",
 };
